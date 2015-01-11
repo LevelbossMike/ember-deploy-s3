@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "chalk": "^0.5.1",
+    "core-object": "0.0.2",
     "s3": "^4.3.1"
   }
 }
