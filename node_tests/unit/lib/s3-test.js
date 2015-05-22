@@ -136,5 +136,31 @@ describe('S3Adapter', function() {
       var lastLine = getLastUILine(s3Adapter.ui.output);
       expect(chalk.stripColor(lastLine)).to.eq(expected);
     });
+
+    it('marks files with a Content-Encoding of gzip on files that are marked as gzipped', function() {
+      var uploadParams = s3Adapter.getUploadParams();
+
+      ['assets/my-app.js',
+       'assets/my-app.css',
+       'assets/logo.svg'].forEach(function (filename) {
+        uploadParams.getS3Params(filename, null, function (_, additionalParams) {
+          expect(additionalParams.ContentEncoding).to.eq('gzip');
+        });
+      });
+
+      uploadParams.getS3Params('assets/images/logo.png', null, function (_, additionalParams) {
+        expect(additionalParams.ContentEncoding).to.eq(undefined);
+      });
+    });
+
+    it('does not marks files with a Content-Encoding of gzip if gzip is false', function() {
+      s3Adapter.config.assets.gzip = false;
+
+      var uploadParams = s3Adapter.getUploadParams();
+
+      uploadParams.getS3Params('assets/my-app.js', null, function (_, additionalParams) {
+        expect(additionalParams.ContentEncoding).to.eq(undefined);
+      });
+    });
   });
 });
