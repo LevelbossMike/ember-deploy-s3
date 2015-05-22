@@ -139,7 +139,6 @@ describe('S3Adapter', function() {
 
     it('marks files with a Content-Encoding of gzip on files that are marked as gzipped', function() {
       var uploadParams = s3Adapter.getUploadParams();
-      var s3Params = uploadParams.s3Params;
 
       ['assets/my-app.js',
        'assets/my-app.css',
@@ -158,7 +157,6 @@ describe('S3Adapter', function() {
       s3Adapter.config.assets.gzip = false;
 
       var uploadParams = s3Adapter.getUploadParams();
-      var s3Params = uploadParams.s3Params;
 
       uploadParams.getS3Params('assets/my-app.js', null, function (_, additionalParams) {
         expect(additionalParams.ContentEncoding).to.eq(undefined);
