@@ -44,3 +44,18 @@ This is the s3-adapter implementation to use [s3](aws.amazon.com/s3/) with
     ]
 }
 ```
+
+# A note about deployments and `buildEnv`
+
+[ember-cli-deploy](https://www.github.com/ember-cli/ember-cli-deploy) gives you an option called `buildEnv` in `config/deploy.js`. This option is meant to be used for production-like environments like for example `staging` that should behave like production (concatenate js files, minify build, fingerprint assets) but are using other settings than production specified in `config/environment.js` in your Ember application.
+
+The `buildEnv` option is used to to pass the respective environment to the `ember build`-command that ember-cli-deploy is using to build your application before uploading files. If `buildEnv` is not specified `ember-cli-deploy` will use `production` as the default setting.
+
+Though you could in theory specify a buildEnv `development` in your `deploy.js` it is encouraged not to do so. There are multiple reasons for this.
+
+1. When you want to deploy your application you want assets to be concatenated, minified and fingerprinted which will not be done when building for the `development` environment.
+2. Deploying your application is not part of your development workflow. When you want to try out stuff in your ember application you should do so when developing locally on your development machine.
+3. If you want to have specific logging output in different environments or different api-hosts across environments there is `config/environment.js` to create a production-like environment and [Ember.Logger](http://emberjs.com/api/classes/Ember.Logger.html) to do any logging that you need to be doing.
+4. Because assets are not fingerprinted and `ember-deploy-s3` will upload your assets with basically a 'cache-forever' setting you will not get the latest assets served to your browser after deploying your application to s3. This is annoying to debug and will cost you lots of time if you decide to use a `buildEnv` 'development' (You have been warned ;))
+
+Instead what you should be doing when the need for multiple different deployable environments arises is to create `production-like` environments for these environments. There's a section in the [ember-cli-deploy docs](http://ember-cli.github.io/ember-cli-deploy/docs/v0.4.x/fingerprinting-options-and-staging-environments/) how to do this. In the provided example you would also need to pass `staging` as the `buildEnv` option if you wanted to use different api-hosts for `production` and `staging` provided from `environment.js`.
