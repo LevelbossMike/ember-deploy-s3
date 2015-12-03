@@ -1,11 +1,10 @@
 # Ember-deploy-s3 [![Build Status](https://travis-ci.org/LevelbossMike/ember-deploy-s3.svg?branch=master)](https://travis-ci.org/LevelbossMike/ember-deploy-s3)
 
-+![](https://ember-cli-deploy.github.io/ember-cli-deploy-version-badges/plugins/ember-deploy-github.svg)
-+
-+<hr/>
-+**WARNING: This plugin is only compatible with ember-cli-deploy versions < 0.5.0 and deprecated in favor of [ember-cli-deploy-s3](https://github.com/ember-cli-deploy/ember-cli-deploy-s3). Please consider upgrading to an up to date version of [ember-cli-deploy](https://github.com/ember-cli/ember-cli-deploy) when using in production**
-+<hr/>
-+
+![](https://ember-cli-deploy.github.io/ember-cli-deploy-version-badges/plugins/ember-deploy-github.svg)
+
+<hr/>
+**WARNING: This plugin is only compatible with ember-cli-deploy versions < 0.5.0 and deprecated in favor of [ember-cli-deploy-s3](https://github.com/ember-cli-deploy/ember-cli-deploy-s3). Please consider upgrading to an up to date version of [ember-cli-deploy](https://github.com/ember-cli/ember-cli-deploy) when using in production**
+<hr/>
 
 This is the s3-adapter implementation to use [s3](aws.amazon.com/s3/) with
 [ember-deploy](https://github.com/levelbossmike/ember-deploy).
