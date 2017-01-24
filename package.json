@@ -1,6 +1,6 @@
 {
   "name": "ember-deploy-s3",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Ember-Deploy assets-adapter for amazon s3",
   "directories": {
     "doc": "doc",
